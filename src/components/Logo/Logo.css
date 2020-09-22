@@ -1,0 +1,16 @@
+.Tilt {
+  background: rgba(128, 128, 172, 0.5);
+}
+
+.Tilt-inner {
+  height: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: red;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+}
