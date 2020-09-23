@@ -12,3 +12,11 @@
   justify-content: center;
   cursor: pointer;
 }
+
+.absolute p {
+  box-shadow: 0 0 0 3px #149df2 inset;
+  padding: 5px 5px;
+  position: absolute;
+  top: -26%;
+  left: 0;
+}
