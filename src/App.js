@@ -113,7 +113,7 @@ class App extends React.Component {
       .predict(Clarifai.DEMOGRAPHICS_MODEL, this.state.input)
       .then((response) => {
         if (response) {
-          fetch("http://localhost:3000/image", {
+          fetch("http://localhost:3001/image", {
             method: "put",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify({
