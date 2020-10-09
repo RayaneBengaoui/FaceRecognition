@@ -106,7 +106,7 @@ class App extends React.Component {
   onSubmit = () => {
     this.setState({ imageUrl: this.state.input });
 
-    fetch("https://shrouded-reaches-95938.herokuapp.com/imageurl", {
+    fetch("https://rayane-fr-api.herokuapp.com/imageurl", {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
@@ -116,7 +116,7 @@ class App extends React.Component {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-          fetch("https://shrouded-reaches-95938.herokuapp.com/image", {
+          fetch("https://rayane-fr-api.herokuapp.com/image", {
             method: "put",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify({
