@@ -64,7 +64,7 @@ class App extends React.Component {
     let clarifaiFaces = [];
     let facesLocation = [];
 
-    data.outputs[0].data.forEach((output) => {
+    data.outputs[0].data.regions.forEach((output) => {
       clarifaiFaces.push(output.region_info.bounding_box);
     });
     console.log("clarifaifaces", clarifaiFaces);
