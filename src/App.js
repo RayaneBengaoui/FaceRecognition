@@ -56,29 +56,17 @@ class App extends React.Component {
   };
 
   calculateFaceLocation = (data) => {
-    // const clarifaiFace =
-    //   data.outputs[0].data.regions[0].region_info.bounding_box;
-
-    // const infos = data.outputs[0].data.regions[0].data.concepts;
-    console.log("data", data);
     let clarifaiFaces = [];
     let facesLocation = [];
 
     data.outputs[0].data.regions.forEach((output) => {
       clarifaiFaces.push(output.region_info.bounding_box);
     });
-    console.log("clarifaifaces", clarifaiFaces);
 
     const image = document.getElementById("input-image");
     const width = Number(image.width);
     const height = Number(image.height);
 
-    // return {
-    //   leftCol: clarifaiFace.left_col * width,
-    //   topRow: clarifaiFace.top_row * height,
-    //   rightCol: width - clarifaiFace.right_col * width,
-    //   bottomRow: height - clarifaiFace.bottom_row * height,
-    // };
     clarifaiFaces.forEach((face) => {
       facesLocation.push({
         leftCol: face.left_col * width,
@@ -88,13 +76,6 @@ class App extends React.Component {
       });
     });
 
-    // return {
-    //   leftCol: clarifaiFace.left_col * width,
-    //   topRow: clarifaiFace.top_row * height,
-    //   rightCol: width - clarifaiFace.right_col * width,
-    //   bottomRow: height - clarifaiFace.bottom_row * height,
-    // };
-    console.log("faceslocation", facesLocation);
     return facesLocation;
   };
 
