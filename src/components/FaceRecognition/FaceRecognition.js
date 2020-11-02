@@ -2,6 +2,7 @@ import React from "react";
 import "./FaceRecognition.css";
 
 const FaceRecognition = ({ imageUrl, box }) => {
+  console.log(box);
   let boundingBoxes = box.map((item) => (
     <div
       className="bounding-box"
