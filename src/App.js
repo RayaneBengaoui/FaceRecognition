@@ -60,13 +60,14 @@ class App extends React.Component {
     //   data.outputs[0].data.regions[0].region_info.bounding_box;
 
     // const infos = data.outputs[0].data.regions[0].data.concepts;
-
+    console.log("data", data);
     let clarifaiFaces = [];
     let facesLocation = [];
 
     data.outputs.forEach((output) => {
       clarifaiFaces.push(output.data.regions[0].region_info.bounding_box);
     });
+    console.log("clarifaifaces", clarifaiFaces);
 
     const image = document.getElementById("input-image");
     const width = Number(image.width);
@@ -87,6 +88,13 @@ class App extends React.Component {
       });
     });
 
+    // return {
+    //   leftCol: clarifaiFace.left_col * width,
+    //   topRow: clarifaiFace.top_row * height,
+    //   rightCol: width - clarifaiFace.right_col * width,
+    //   bottomRow: height - clarifaiFace.bottom_row * height,
+    // };
+    console.log("faceslocation", facesLocation);
     return facesLocation;
   };
 
