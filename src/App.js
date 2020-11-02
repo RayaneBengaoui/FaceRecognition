@@ -25,7 +25,7 @@ const particlesOptions = {
 const initialState = {
   input: "",
   imageUrl: ",",
-  box: {},
+  box: [],
   route: "signin",
   isSignedIn: false,
   user: {
@@ -56,49 +56,44 @@ class App extends React.Component {
   };
 
   calculateFaceLocation = (data) => {
-    const clarifaiFace =
-      data.outputs[0].data.regions[0].region_info.bounding_box;
+    // const clarifaiFace =
+    //   data.outputs[0].data.regions[0].region_info.bounding_box;
 
-    const infos = data.outputs[0].data.regions[0].data.concepts;
+    // const infos = data.outputs[0].data.regions[0].data.concepts;
 
-    let { age, agePercentage } = this.calculateAgeSex(infos);
+    let clarifaiFaces = [];
+    let facesLocation = [];
+
+    data.outputs.forEach((output) => {
+      clarifaiFaces.push(output.data.regions[0].region_info.bounding_box);
+    });
+
     const image = document.getElementById("input-image");
     const width = Number(image.width);
     const height = Number(image.height);
 
-    return {
-      leftCol: clarifaiFace.left_col * width,
-      topRow: clarifaiFace.top_row * height,
-      rightCol: width - clarifaiFace.right_col * width,
-      bottomRow: height - clarifaiFace.bottom_row * height,
-      age: age,
-      agePercentage: agePercentage,
-    };
+    // return {
+    //   leftCol: clarifaiFace.left_col * width,
+    //   topRow: clarifaiFace.top_row * height,
+    //   rightCol: width - clarifaiFace.right_col * width,
+    //   bottomRow: height - clarifaiFace.bottom_row * height,
+    // };
+    clarifaiFaces.forEach((face) => {
+      facesLocation.push({
+        leftCol: face.left_col * width,
+        topRow: face.top_row * height,
+        rightCol: width - face.right_col * width,
+        bottomRow: height - face.bottom_row * height,
+      });
+    });
+
+    return facesLocation;
   };
 
   displayFaceBox = (box) => {
     this.setState({ box: box });
   };
 
-  calculateAgeSex = (data) => {
-    let agePercentage = 0;
-    let age = 0.0;
-
-    data.forEach((element) => {
-      if (
-        element.vocab_id === "age_appearance" &&
-        element.value > agePercentage
-      ) {
-        age = element.name;
-        agePercentage = element.value;
-      }
-    });
-
-    return {
-      age: age,
-      agePercentage: agePercentage,
-    };
-  };
   onInputChange = (event) => {
     this.setState({ input: event.target.value });
   };
